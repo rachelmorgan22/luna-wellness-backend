@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: luna-wellness-backend
+    env: java
+    branch: main
+    buildCommand: ./mvnw clean install
+    startCommand: ./mvnw spring-boot:run
+    plan: free
+    region: oregon
+    runtime: docker
