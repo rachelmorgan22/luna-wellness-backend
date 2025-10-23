@@ -1,14 +1,17 @@
-# Use official OpenJDK image as a base
-FROM openjdk:17-jdk-slim
+# Use a JDK 21 image
+FROM eclipse-temurin:21-jdk
 
-# Add a volume pointing to /tmp
-VOLUME /tmp
+# Set working directory in container
+WORKDIR /app
 
-# Copy the built jar into the container
-COPY target/backend-0.0.1-SNAPSHOT.jar app.jar
+# Copy everything to container
+COPY . .
 
-# Expose port 8080 (Spring Boot default)
+# Build the Spring Boot app
+RUN ./mvnw clean package -DskipTests
+
+# Expose the port Spring Boot runs on
 EXPOSE 8080
 
-# Run the jar file
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Run the Spring Boot app
+CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
