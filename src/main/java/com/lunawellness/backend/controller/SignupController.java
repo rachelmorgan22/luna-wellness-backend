@@ -16,7 +16,7 @@ import com.lunawellness.backend.repository.SignupRepository;
 
 @RestController
 @RequestMapping("/api/signups")
-@CrossOrigin(origins = "https://lunawellness.netlify.app/") // replace with actual Netlify URL
+@CrossOrigin(origins = "https://luna-wellness-frontend.netlify.app") // replace with actual Netlify URL
 public class SignupController {
 
     @Autowired
