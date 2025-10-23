@@ -39,4 +39,15 @@ public class SignupController {
     public List<Signup> getAllSignups() {
         return signupRepository.findAll();
     }
+
+    @GetMapping("/test-db")
+public ResponseEntity<String> testDbConnection() {
+    try {
+        long count = signupRepository.count();
+        return ResponseEntity.ok("MongoDB is connected! Signups count: " + count);
+    } catch (Exception e) {
+        return ResponseEntity.status(500).body("Failed to connect to MongoDB: " + e.getMessage());
+    }
+}
+
 }

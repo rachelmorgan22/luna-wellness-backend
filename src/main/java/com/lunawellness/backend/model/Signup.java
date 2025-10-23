@@ -1,36 +1,30 @@
 package com.lunawellness.backend.model;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "signups")
+@Document(collection = "signups")
 public class Signup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;  // MongoDB ID is String
 
     private String name;
     private String email;
 
-    @Column(name = "class_type")
+    @Field("class_type")
     private String classType;
 
     private String username;
     private String password;
 
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    @CreatedDate
+    @Field("created_at")
+    private Instant createdAt;
 
     // Constructors
     public Signup() {}
@@ -44,8 +38,8 @@ public class Signup {
     }
 
     // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -62,5 +56,6 @@ public class Signup {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
+    public Instant getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }
 }
